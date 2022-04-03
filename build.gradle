@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+}
+
+group 'pers.ninthseason'
+version '0.0.4-BETA'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+jar {
+    from { configurations.runtimeClasspath.findAll { it.name.endsWith('jar') }.collect { zipTree(it) } }
+
+    manifest {
+        attributes 'Main-Class': 'pers.ninthseason.tzfe.Launcher'
+    }
+}
